@@ -1,32 +1,63 @@
 package com.example.roomdatabase.event_model
 
+
+import com.google.gson.annotations.SerializedName
+
 data class Event(
-    val bookingId: String,
-    val brand: String,
-    val calendar: String,
-    val cancelEventId: String,
-    val consumer: List<String>,
-    val cost: Double,
-    val createdTime: Long,
-    val endDateTime: String,
-    val endTime: Long,
-    val id: String,
-    val isDeleted: Boolean,
-    val isExternal: Boolean,
-    val label: String,
-    val location: Location,
-    val log: Log,
-    val maxSeats: Int,
-    val merchant: String,
-    val metaData: MetaData,
-    val parentId: String,
-    val provider: List<String>,
-    val resource: List<Any>,
-    val service: List<String>,
-    val source: String,
-    val startDateTime: String,
-    val startTime: Long,
-    val title: String,
-    val type: String,
-    val updatedTime: Long
+    @SerializedName("bookingId")
+    val bookingId: String?,
+    @SerializedName("brand")
+    val brand: String?,
+    @SerializedName("calendar")
+    val calendar: String?,
+    @SerializedName("cancelEventId")
+    val cancelEventId: String?,
+    @SerializedName("consumer")
+    val consumer: List<String>?,
+    @SerializedName("cost")
+    val cost: Double?,
+    @SerializedName("createdTime")
+    val createdTime: Long?,
+    @SerializedName("endDateTime")
+    val endDateTime: String?,
+    @SerializedName("endTime")
+    val endTime: Long?,
+    @SerializedName("id")
+    val id: String?,
+    @SerializedName("isDeleted")
+    val isDeleted: Boolean?,
+    @SerializedName("isExternal")
+    val isExternal: Boolean?,
+    @SerializedName("label")
+    val label: String?,
+    @SerializedName("location")
+    val location: Location?,
+    @SerializedName("log")
+    val log: Log?,
+    @SerializedName("maxSeats")
+    val maxSeats: Int?,
+    @SerializedName("merchant")
+    val merchant: String?,
+    @SerializedName("metaData")
+    val metaData: MetaData?,
+    @SerializedName("parentId")
+    val parentId: String?,
+    @SerializedName("provider")
+    val provider: List<String>?,
+    @SerializedName("resource")
+    val resource: List<Any>?,
+    @SerializedName("service")
+    val service: List<String>?,
+    @SerializedName("source")
+    val source: String?,
+    @SerializedName("startDateTime")
+    val startDateTime: String?,
+    @SerializedName("startTime")
+    val startTime: Long?,
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("type")
+    val type: String?,
+    @SerializedName("updatedTime")
+    val updatedTime: Long?
 )

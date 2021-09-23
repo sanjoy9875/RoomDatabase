@@ -19,7 +19,7 @@ interface ContactDAO {
     /**
      * This function fetch the list of item from our Database
      * */
-    @Query("select * from contact_entity")
-    fun getEntity(): LiveData<List<ContactEntity>>
+    @Query("select * from contact_entity WHERE ownerID=:providerId")
+    fun getEntity(providerId : String): ContactEntity
 
 }

@@ -12,7 +12,7 @@ class RetrofitGenerator {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         fun getInstance(): Retrofit {
             return Retrofit.Builder()
-                .baseUrl("https://d0ef7857-55b4-4286-bc0d-884794877df1.mock.pstmn.io")
+                .baseUrl("https://dd027c0c-6c86-4fdf-bbc9-810dfbeed120.mock.pstmn.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build())
                 .build()

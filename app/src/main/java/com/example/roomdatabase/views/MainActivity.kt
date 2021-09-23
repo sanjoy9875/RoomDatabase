@@ -3,6 +3,7 @@ package com.example.roomdatabase.views
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,14 +23,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: EntityAdapter
 
-    private lateinit var viewModel : MyViewModel
+    private lateinit var viewModel: MyViewModel
     var joinList = mutableListOf<JoinEntity>()
 
-   private var contactList = mutableListOf<ContactEntity>()
-   private var eventList = mutableListOf<EventEntity>()
-
-    private var contactSize = 0
-    private var eventSize = 0
+    private var eventList = mutableListOf<EventEntity>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,56 +52,32 @@ class MainActivity : AppCompatActivity() {
         viewModel.getContactResponse()
         viewModel.getEventResponse()
 
-        viewModel.getContactEntity().observe(this, Observer {
-            Log.d("main",it.toString())
-            contactList.clear()
-            contactList.addAll(it)
-            setContactSize(contactList.size)
-        })
-
-        viewModel.getEventEntity().observe(this, Observer {
-            Log.d("main",it.toString())
-                eventList.clear()
-                eventList.addAll(it)
-            setEventSize(eventList.size)
-        })
 
         tvItem.setOnClickListener {
-            addList()
-        }
+            progressBar.visibility = View.VISIBLE
+            CoroutineScope(Dispatchers.IO).launch {
+                val event = viewModel.getEventEntity()
+                eventList.addAll(event)
+                joinList.clear()
+                for (i in 0 until eventList.size) {
 
-    }
-     fun setContactSize(contactSize : Int){
-        this.contactSize = contactSize
-    }
-     fun setEventSize(eventSize : Int){
-        this.eventSize = eventSize
-    }
-
-    fun addList(){
-        if (eventSize>0 && contactSize>0) {
-            joinList.clear()
-            for (i in 0 until eventSize){
-                for (j in 0 until contactSize){
-                    if (eventList[i].brand==contactList[j].brandId){
-                        val joinEntity = JoinEntity(
-                            contactList[j].type,
-                            contactList[j].firstName,
-                            contactList[j].brandId,
-                            eventList[i].type,
-                            eventList[i].title,
-                            eventList[i].brand,
-                        )
-                        joinList.add(joinEntity)
-                        break
-
-                    }
+                    val data = viewModel.getContactEntity(eventList[i].provider!!)
+                    val joinEntity = JoinEntity(
+                        data.type,
+                        data.firstName,
+                        data.ownerID,
+                        eventList[i].type,
+                        eventList[i].title,
+                        eventList[i].provider
+                    )
+                    joinList.add(joinEntity)
 
                 }
+                CoroutineScope(Dispatchers.Main).launch {
+                    adapter.notifyDataSetChanged()
+                    progressBar.visibility = View.GONE
+                }
             }
-            Log.d("joinList",joinList.toString())
-            adapter.notifyDataSetChanged()
         }
     }
-
 }

@@ -1,6 +1,11 @@
 package com.example.roomdatabase.event_model
 
+
+import com.google.gson.annotations.SerializedName
+
 data class EventsModel(
-    val `data`: Data,
-    val response: Boolean
+    @SerializedName("data")
+    val `data`: Data?,
+    @SerializedName("response")
+    val response: Boolean?
 )

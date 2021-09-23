@@ -44,7 +44,7 @@ data class Contact(
     val mergedContactID: List<Any>,
     val middleName: Any,
     val onCallFlowEnabled: Boolean,
-    val ownerID: Any,
+    val ownerID: String,
     val password: Any,
     val photoID: Any,
     val primary: Boolean,

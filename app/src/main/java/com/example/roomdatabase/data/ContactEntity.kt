@@ -13,8 +13,8 @@ data class ContactEntity(
     @ColumnInfo(name = "firstName")
     var firstName: String?,
 
-    @ColumnInfo(name = "brandId")
-    var brandId: String?,
+    @ColumnInfo(name = "ownerID")
+    var ownerID: String?,
 
     ) {
 

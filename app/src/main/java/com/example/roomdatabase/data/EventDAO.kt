@@ -20,6 +20,6 @@ interface EventDAO {
      * This function fetch the list of item from our Database
      * */
     @Query("select * from event_entity")
-    fun getEntity(): LiveData<List<EventEntity>>
+    fun getEntity(): List<EventEntity>
 
 }

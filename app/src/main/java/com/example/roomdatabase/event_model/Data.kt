@@ -1,5 +1,9 @@
 package com.example.roomdatabase.event_model
 
+
+import com.google.gson.annotations.SerializedName
+
 data class Data(
-    val events: List<Event>
+    @SerializedName("events")
+    val events: List<Event>?
 )

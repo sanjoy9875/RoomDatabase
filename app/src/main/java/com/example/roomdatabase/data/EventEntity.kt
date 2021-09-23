@@ -13,8 +13,8 @@ data class EventEntity(
     @ColumnInfo(name = "title")
     var title: String?,
 
-    @ColumnInfo(name = "brand")
-    var brand: String?,
+    @ColumnInfo(name = "provider")
+    var provider: String?,
 
     ) {
 

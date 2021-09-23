@@ -22,7 +22,7 @@ class EntityAdapter(private var entity: List<JoinEntity>) :
 
         holder.contactType.text = entity[position].contactType
         holder.firstName.text = entity[position].contactFirstName
-        holder.brandId.text = entity[position].brandID
+        holder.providerId.text = entity[position].provider
         holder.eventType.text = entity[position].eventType
         holder.eventTitle.text = entity[position].eventTitle
 
@@ -36,7 +36,7 @@ class EntityAdapter(private var entity: List<JoinEntity>) :
 
         val contactType: TextView = view.findViewById(R.id.tvContactTypeText)
         val firstName: TextView = view.findViewById(R.id.tvFirstNameText)
-        val brandId: TextView = view.findViewById(R.id.tvBrandIdText)
+        val providerId: TextView = view.findViewById(R.id.tvProviderIdText)
         val eventType: TextView = view.findViewById(R.id.tvEventTypeText)
         val eventTitle: TextView = view.findViewById(R.id.tvEventTitleText)
 

@@ -33,14 +33,13 @@ class MyViewModel(val repository: MyRepository) : ViewModel(){
         }
     }
 
-    fun getContactEntity(): LiveData<List<ContactEntity>>{
-        Log.d("viewModel",repository.getContactEntity().toString())
-       return repository.getContactEntity()
+
+    fun getEventEntity():List<EventEntity>{
+        return repository.getEventEntity()
     }
 
-    fun getEventEntity(): LiveData<List<EventEntity>>{
-        Log.d("viewModel",repository.getEventEntity().toString())
-        return repository.getEventEntity()
+    fun getContactEntity(providerId : String) : ContactEntity{
+        return repository.getContactEntity(providerId)
     }
 
 
