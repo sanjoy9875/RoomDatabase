@@ -1,0 +1,32 @@
+package com.example.roomdatabase.event_model
+
+data class Event(
+    val bookingId: String,
+    val brand: String,
+    val calendar: String,
+    val cancelEventId: String,
+    val consumer: List<String>,
+    val cost: Double,
+    val createdTime: Long,
+    val endDateTime: String,
+    val endTime: Long,
+    val id: String,
+    val isDeleted: Boolean,
+    val isExternal: Boolean,
+    val label: String,
+    val location: Location,
+    val log: Log,
+    val maxSeats: Int,
+    val merchant: String,
+    val metaData: MetaData,
+    val parentId: String,
+    val provider: List<String>,
+    val resource: List<Any>,
+    val service: List<String>,
+    val source: String,
+    val startDateTime: String,
+    val startTime: Long,
+    val title: String,
+    val type: String,
+    val updatedTime: Long
+)

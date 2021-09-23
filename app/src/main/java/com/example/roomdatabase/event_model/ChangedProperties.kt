@@ -1,0 +1,3 @@
+package com.example.roomdatabase.event_model
+
+class ChangedProperties
