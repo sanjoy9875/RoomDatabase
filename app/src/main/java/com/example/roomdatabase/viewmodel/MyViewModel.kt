@@ -4,15 +4,26 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.example.roomdatabase.JoinEntity
+import com.example.roomdatabase.contact_model.ContactsModel
 import com.example.roomdatabase.data.ContactEntity
 import com.example.roomdatabase.data.EventEntity
+import com.example.roomdatabase.remote.Resource
 import com.example.roomdatabase.repository.MyRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MyViewModel(val repository: MyRepository) : ViewModel(){
+
+    fun getContact():LiveData<Resource<ContactsModel>>{
+        return liveData(Dispatchers.IO){
+            emit(Resource.loading(null))
+            val data = repository.getContact()
+            emit(data)
+        }
+    }
 
     /**
      * Getting the response from api
@@ -32,7 +43,6 @@ class MyViewModel(val repository: MyRepository) : ViewModel(){
             repository.getEventResponse()
         }
     }
-
 
     fun getEventEntity():List<EventEntity>{
         return repository.getEventEntity()

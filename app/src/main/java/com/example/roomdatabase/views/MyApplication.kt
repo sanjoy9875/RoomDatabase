@@ -9,12 +9,12 @@ class MyApplication : Application() {
 
     private val contactDAO by lazy {
         val roomDatabase = ContactDatabase.getRoomDatabase(this)
-        roomDatabase.getEntityDao()
+        roomDatabase.getContactDao()
     }
 
     private val eventDAO by lazy {
         val roomDatabase = EventDatabase.getRoomDatabase(this)
-        roomDatabase.getEntityDao()
+        roomDatabase.getEventDao()
     }
 
     val repository by lazy {

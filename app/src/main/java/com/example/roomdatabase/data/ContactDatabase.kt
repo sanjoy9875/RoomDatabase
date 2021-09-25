@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [ContactEntity::class], version = 1)
 abstract class ContactDatabase : RoomDatabase() {
 
-    abstract fun getEntityDao(): ContactDAO
+    abstract fun getContactDao(): ContactDAO
 
     companion object {
 

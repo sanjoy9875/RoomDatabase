@@ -1,14 +1,13 @@
 package com.example.roomdatabase.repository
 
 import androidx.lifecycle.LiveData
+import com.example.roomdatabase.contact_model.ContactsModel
 
 import com.example.roomdatabase.data.ContactDAO
 import com.example.roomdatabase.data.ContactEntity
 import com.example.roomdatabase.data.EventDAO
 import com.example.roomdatabase.data.EventEntity
-import com.example.roomdatabase.remote.APIService
-import com.example.roomdatabase.remote.RetrofitGenerator
-import com.example.roomdatabase.remote.RetrofitGenerator2
+import com.example.roomdatabase.remote.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,8 +18,21 @@ class MyRepository(val contactDAO: ContactDAO,val eventDAO: EventDAO)  {
     val contactApi = RetrofitGenerator.getInstance().create(APIService::class.java)
     val eventApi = RetrofitGenerator2.getInstance().create(APIService::class.java)
 
+    private val responseHandler = ResponseHandler()
+
     private var contactList = mutableListOf<ContactEntity>()
     private var eventList = mutableListOf<EventEntity>()
+
+
+    suspend fun getContact():Resource<ContactsModel>{
+        return try{
+            val result = contactApi.getContacts(CONTENT_TYPE)
+            responseHandler.handleSuccess(result)
+        }
+        catch (e : Exception){
+            responseHandler.handleException(e)
+        }
+    }
 
     /**
      * This function will call our API & give us the response
