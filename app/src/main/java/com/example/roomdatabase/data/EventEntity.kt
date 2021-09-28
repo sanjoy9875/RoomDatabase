@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey
 data class EventEntity(
 
     @ColumnInfo(name = "type")
-    var type: String?,
+    var type: String? = null,
 
     @ColumnInfo(name = "title")
-    var title: String?,
+    var title: String? = null,
 
     @ColumnInfo(name = "provider")
-    var provider: String?,
+    var provider: String? = null,
 
     ) {
 

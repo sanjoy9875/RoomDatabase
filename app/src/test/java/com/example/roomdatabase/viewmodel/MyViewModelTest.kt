@@ -4,29 +4,28 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.roomdatabase.contact_model.Contact
 import com.example.roomdatabase.contact_model.ContactsModel
 import com.example.roomdatabase.data.*
 import com.example.roomdatabase.remote.*
 import com.example.roomdatabase.repository.MyRepository
+import com.google.common.truth.Truth.assertThat
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.doReturn
 import org.robolectric.annotation.Config
-import java.net.SocketException
+
 
 @RunWith(AndroidJUnit4::class)
-@Config(manifest = Config.NONE)
+@Config(manifest=Config.NONE)
 class MyViewModelTest{
 
-    @Mock
     lateinit var myRepository: MyRepository
 
     @Mock
@@ -35,7 +34,6 @@ class MyViewModelTest{
     @Mock
     lateinit var responseHandler: ResponseHandler
 
-    @Mock
     lateinit var contactsModel: ContactsModel
 
     @Mock
@@ -51,6 +49,15 @@ class MyViewModelTest{
 
     @Before
     fun setUp(){
+        val c = mutableListOf<Contact>()
+        contactsModel = ContactsModel(c,
+            6924,
+            "%2Fapi%2Fcontact%2Faccount%2FSEN42%2Fscroll%2F20%2FUSER",
+        true)
+
+        responseHandler = ResponseHandler()
+        success = Resource.success(contactsModel)
+        success = responseHandler.handleSuccess(contactsModel)
 
         val context1 = ApplicationProvider.getApplicationContext<Context>()
         val context2 = ApplicationProvider.getApplicationContext<Context>()
@@ -91,47 +98,47 @@ class MyViewModelTest{
     }
 
     @Test
-    fun `get list of eventEntity from event database`(){
+    fun test_insert_and_get_operation_from_event_database(){
 
         val result = myViewModel.getEventEntity().find {
             it.type=="event" && it.title=="test" && it.provider=="r0050"
         }
-        assert(result!=null)
+        assertThat(result).isNotNull()
 
     }
 
     @Test
-    fun `get contactEntity from contact database`(){
+    fun test_insert_and_get_operation_from_contact_database(){
 
         val contactEntity = ContactEntity("contact","amit","r0060")
         val result = myViewModel.getContactEntity("r0060")
 
-        assert(result==contactEntity)
+        assertThat(result).isEqualTo(contactEntity)
 
     }
 
     @Test
-    fun  `get contacts model from api successful`(){
+    fun  test_api_call(){
         myViewModel.getContactResponse()
-        assertEquals(success.status,Status.SUCCESS)
+        assertThat(success.status).isEqualTo(Status.SUCCESS)
     }
 
 
     suspend fun data() {
-        responseHandler = ResponseHandler()
-        success = responseHandler.handleSuccess(contactsModel)
 
+        api = RetrofitGenerator.getInstance().create(APIService::class.java)
         `when`<ContactsModel>(
             api.getContacts(
                 "application/json"
             )
         ).thenReturn(contactsModel)
 
+
         `when`<Resource<ContactsModel>>(
             myRepository.getContact()
         ).thenReturn(success)
 
-
     }
+
 }
 

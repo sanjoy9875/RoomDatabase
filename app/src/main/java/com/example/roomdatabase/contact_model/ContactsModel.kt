@@ -1,8 +1,8 @@
 package com.example.roomdatabase.contact_model
 
 data class ContactsModel(
-    val contacts: List<Contact>,
-    val count: Int,
-    val cursor: String,
-    val success: Boolean
+    val contacts: List<Contact>? = null,
+    val count: Int? = null,
+    val cursor: String? = null,
+    val success: Boolean? = null
 )

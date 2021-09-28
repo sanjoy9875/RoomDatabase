@@ -20,11 +20,11 @@ class EntityAdapter(private var entity: List<JoinEntity>) :
 
     override fun onBindViewHolder(holder: EntityViewHolder, position: Int) {
 
-        holder.contactType.text = entity[position].contactType
-        holder.firstName.text = entity[position].contactFirstName
-        holder.providerId.text = entity[position].provider
-        holder.eventType.text = entity[position].eventType
-        holder.eventTitle.text = entity[position].eventTitle
+        holder.contactType.text = entity[position].contactEntity?.type
+        holder.firstName.text = entity[position].contactEntity?.firstName
+        holder.providerId.text = entity[position].eventEntity?.provider
+        holder.eventType.text = entity[position].eventEntity?.type
+        holder.eventTitle.text = entity[position].eventEntity?.title
 
         }
 

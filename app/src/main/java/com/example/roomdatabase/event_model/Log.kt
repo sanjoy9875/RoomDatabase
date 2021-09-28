@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Log(
     @SerializedName("changedProperties")
-    val changedProperties: ChangedProperties?
+    val changedProperties: ChangedProperties? = null
 )

@@ -1,11 +1,10 @@
 package com.example.roomdatabase
 
+import com.example.roomdatabase.data.ContactEntity
+import com.example.roomdatabase.data.EventEntity
+
 class JoinEntity(
-    var contactType: String?,
-    var contactFirstName: String?,
-    var ownerID: String?,
-    var eventType: String?,
-    var eventTitle: String?,
-    var provider: String?
+    var contactEntity: ContactEntity? = null,
+    var eventEntity: EventEntity? = null
 ) {
 }

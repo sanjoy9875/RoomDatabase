@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class MetaData(
     @SerializedName("bookingId")
-    val bookingId: String?
+    val bookingId: String? = null
 )

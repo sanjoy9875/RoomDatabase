@@ -96,8 +96,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     testImplementation 'org.robolectric:robolectric:4.4'
 
-    androidTestCompile "android.arch.core:core-testing:1.1.1"
-
+    testImplementation "com.google.truth:truth:1.1"
+    testImplementation "io.mockk:mockk:1.10.0"
 
 
 }

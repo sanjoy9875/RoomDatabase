@@ -43,7 +43,7 @@ class MyRepository(val contactDAO: ContactDAO,val eventDAO: EventDAO)  {
             val result = contactApi.getContacts(CONTENT_TYPE)
 
             if (contactList.size==0) {
-                for (i in 0 until result.contacts.size) {
+                for (i in 0 until (result?.contacts?.size!!)) {
                     var contactEntity = ContactEntity(
                         result.contacts[i].type,
                         result.contacts[i].firstName,

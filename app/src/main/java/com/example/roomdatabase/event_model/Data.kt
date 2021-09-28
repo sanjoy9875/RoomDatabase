@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Data(
     @SerializedName("events")
-    val events: List<Event>?
+    val events: List<Event>? = null
 )

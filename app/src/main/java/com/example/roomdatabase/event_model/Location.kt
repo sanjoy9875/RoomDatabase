@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Location(
     @SerializedName("videoMeeting")
-    val videoMeeting: String?
+    val videoMeeting: String? = null
 )

@@ -18,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.ArrayList
+import java.util.HashMap
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,19 +61,29 @@ class MainActivity : AppCompatActivity() {
                 val event = viewModel.getEventEntity()
                 eventList.addAll(event)
                 joinList.clear()
+
+                val contactList = HashMap<String, ContactEntity>()
+
                 for (i in 0 until eventList.size) {
 
-                    val data = viewModel.getContactEntity(eventList[i].provider!!)
-                    val joinEntity = JoinEntity(
-                        data.type,
-                        data.firstName,
-                        data.ownerID,
-                        eventList[i].type,
-                        eventList[i].title,
-                        eventList[i].provider
-                    )
-                    joinList.add(joinEntity)
+                    if (!contactList.containsKey(eventList[i].provider)) {
 
+                        val data = viewModel.getContactEntity(eventList[i].provider!!)
+
+                        contactList.put(eventList[i].provider!!, data)
+
+                        val joinEntity = JoinEntity(data, eventList[i])
+                        joinList.add(joinEntity)
+
+                    }
+                    else {
+
+                        val data = contactList.get(eventList[i].provider)
+
+                        val joinEntity = JoinEntity(data, eventList[i])
+                        joinList.add(joinEntity)
+
+                    }
                 }
                 CoroutineScope(Dispatchers.Main).launch {
                     adapter.notifyDataSetChanged()

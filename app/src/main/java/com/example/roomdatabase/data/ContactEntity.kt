@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey
 data class ContactEntity(
 
     @ColumnInfo(name = "type")
-    var type: String?,
+    var type: String? = null,
 
     @ColumnInfo(name = "firstName")
-    var firstName: String?,
+    var firstName: String? = null,
 
     @ColumnInfo(name = "ownerID")
-    var ownerID: String?,
+    var ownerID: String? = null,
 
     ) {
 

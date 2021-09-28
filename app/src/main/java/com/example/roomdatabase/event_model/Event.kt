@@ -5,59 +5,59 @@ import com.google.gson.annotations.SerializedName
 
 data class Event(
     @SerializedName("bookingId")
-    val bookingId: String?,
+    val bookingId: String? = null,
     @SerializedName("brand")
-    val brand: String?,
+    val brand: String? = null,
     @SerializedName("calendar")
-    val calendar: String?,
+    val calendar: String? = null,
     @SerializedName("cancelEventId")
-    val cancelEventId: String?,
+    val cancelEventId: String? = null,
     @SerializedName("consumer")
-    val consumer: List<String>?,
+    val consumer: List<String>? = null,
     @SerializedName("cost")
-    val cost: Double?,
+    val cost: Double? = null,
     @SerializedName("createdTime")
-    val createdTime: Long?,
+    val createdTime: Long? = null,
     @SerializedName("endDateTime")
-    val endDateTime: String?,
+    val endDateTime: String? = null,
     @SerializedName("endTime")
-    val endTime: Long?,
+    val endTime: Long? = null,
     @SerializedName("id")
-    val id: String?,
+    val id: String? = null,
     @SerializedName("isDeleted")
-    val isDeleted: Boolean?,
+    val isDeleted: Boolean? = null,
     @SerializedName("isExternal")
-    val isExternal: Boolean?,
+    val isExternal: Boolean? = null,
     @SerializedName("label")
-    val label: String?,
+    val label: String? = null,
     @SerializedName("location")
-    val location: Location?,
+    val location: Location? = null,
     @SerializedName("log")
-    val log: Log?,
+    val log: Log? = null,
     @SerializedName("maxSeats")
-    val maxSeats: Int?,
+    val maxSeats: Int? = null,
     @SerializedName("merchant")
-    val merchant: String?,
+    val merchant: String? = null,
     @SerializedName("metaData")
-    val metaData: MetaData?,
+    val metaData: MetaData? = null,
     @SerializedName("parentId")
-    val parentId: String?,
+    val parentId: String? = null,
     @SerializedName("provider")
-    val provider: List<String>?,
+    val provider: List<String>? = null,
     @SerializedName("resource")
-    val resource: List<Any>?,
+    val resource: List<Any>? = null,
     @SerializedName("service")
-    val service: List<String>?,
+    val service: List<String>? = null,
     @SerializedName("source")
-    val source: String?,
+    val source: String? = null,
     @SerializedName("startDateTime")
-    val startDateTime: String?,
+    val startDateTime: String? = null,
     @SerializedName("startTime")
-    val startTime: Long?,
+    val startTime: Long? = null,
     @SerializedName("title")
-    val title: String?,
+    val title: String? = null,
     @SerializedName("type")
-    val type: String?,
+    val type: String? = null,
     @SerializedName("updatedTime")
-    val updatedTime: Long?
+    val updatedTime: Long? = null
 )
