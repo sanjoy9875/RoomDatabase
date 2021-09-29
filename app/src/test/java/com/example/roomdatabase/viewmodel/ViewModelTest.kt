@@ -27,15 +27,16 @@ class ViewModelTest {
         val eventApi = RetrofitGenerator2.getInstance().create(APIService::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             eventApi.getEvents("application/json")
+
+
         }
     }
 
 
     @Test
-    fun get_operation_from_database(){
+    fun api_test(){
 
 
-        val eventsModel = mockk<EventsModel>()
         val repository = mockk<MyRepository>()
         val viewModel = MyViewModel(repository)
 
