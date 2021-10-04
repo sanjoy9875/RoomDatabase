@@ -1,12 +1,11 @@
 package com.example.roomdatabase.repository
 
-import androidx.lifecycle.LiveData
+import com.example.roomdatabase.contact_model.Contact
 import com.example.roomdatabase.contact_model.ContactsModel
-
 import com.example.roomdatabase.data.ContactDAO
-import com.example.roomdatabase.data.ContactEntity
 import com.example.roomdatabase.data.EventDAO
-import com.example.roomdatabase.data.EventEntity
+import com.example.roomdatabase.event_model.Event
+import com.example.roomdatabase.event_model.EventsModel
 import com.example.roomdatabase.remote.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,79 +14,38 @@ import kotlinx.coroutines.launch
 class MyRepository(val contactDAO: ContactDAO,val eventDAO: EventDAO)  {
 
     val CONTENT_TYPE = "application/json"
-    val contactApi = RetrofitGenerator.getInstance().create(APIService::class.java)
-    val eventApi = RetrofitGenerator2.getInstance().create(APIService::class.java)
+    val contactApi = RetrofitGenerator.getContactInstance().create(APIService::class.java)
+    val eventApi = RetrofitGenerator.getEventInstance().create(APIService::class.java)
 
-    private val responseHandler = ResponseHandler()
+    val responseHandler = ResponseHandler()
 
-    private var contactList = mutableListOf<ContactEntity>()
-    private var eventList = mutableListOf<EventEntity>()
+    private var contactList = mutableListOf<Contact>()
+    private var eventList = mutableListOf<Event>()
 
 
-    suspend fun getContact():Resource<ContactsModel>{
-        return try{
-            val result = contactApi.getContacts(CONTENT_TYPE)
-            responseHandler.handleSuccess(result)
-        }
-        catch (e : Exception){
-            responseHandler.handleException(e)
-        }
+    suspend fun getContactResponse() : Resource<ContactsModel> {
+        val result = contactApi.getContacts(CONTENT_TYPE)
+        return responseHandler.handleSuccess(result)
     }
 
-    /**
-     * This function will call our API & give us the response
-     * response will store in database
-     * */
-    suspend fun getContactResponse()  {
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = contactApi.getContacts(CONTENT_TYPE)
-
-            if (contactList.size==0) {
-                for (i in 0 until (result?.contacts?.size!!)) {
-                    var contactEntity = ContactEntity(
-                        result.contacts[i].type,
-                        result.contacts[i].firstName,
-                        result.contacts[i].ownerID
-                    )
-                    contactList.add(contactEntity)
-                }
-                contactDAO.addEntityToContactsModel(contactList)
-            }
-        }
+    suspend fun insertContactListIntoDatabase(contactList : List<Contact>){
+        contactDAO.addEntityToContactsModel(contactList)
     }
 
-    /**
-     * This function will call our API & give us the response
-     * response will store in database
-     **/
-    suspend fun getEventResponse()  {
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = eventApi.getEvents(CONTENT_TYPE)
-
-            if (eventList.size==0) {
-                for (i in 0 until (result.data?.events?.size!! )) {
-                    var eventEntity = EventEntity(
-                        result.data.events[i].type,
-                        result.data.events[i].title,
-                        result.data.events[i].provider?.get(0)
-                    )
-                    eventList.add(eventEntity)
-                }
-
-                eventDAO.addEntityToEventsModel(eventList)
-            }
-        }
+    suspend fun getEventResponse() : Resource<EventsModel> {
+        val result = eventApi.getEvents(CONTENT_TYPE)
+        return responseHandler.handleSuccess(result)
     }
 
-    /**
-     * Give us the list of ResponseEntity
-     **/
+    suspend fun insertEventListIntoDatabase(eventList : List<Event>){
+        eventDAO.addEntityToEventsModel(eventList)
+    }
 
-    fun getEventEntity() : List<EventEntity>{
+    fun getEventEntity() : List<Event>{
       return eventDAO.getEntity()
     }
 
-    fun getContactEntity(providerId : String) : ContactEntity{
+    fun getContactEntity(providerId : String) : Contact{
         return contactDAO.getEntity(providerId)
     }
 

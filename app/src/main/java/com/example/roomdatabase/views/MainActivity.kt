@@ -2,7 +2,6 @@ package com.example.roomdatabase.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -10,15 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.roomdatabase.JoinEntity
 import com.example.roomdatabase.R
 import com.example.roomdatabase.adapter.EntityAdapter
-import com.example.roomdatabase.data.ContactEntity
-import com.example.roomdatabase.data.EventEntity
+import com.example.roomdatabase.contact_model.Contact
+import com.example.roomdatabase.event_model.Event
 import com.example.roomdatabase.viewmodel.MyViewModel
 import com.example.roomdatabase.viewmodel.MyViewmodelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.ArrayList
 import java.util.HashMap
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MyViewModel
     var joinList = mutableListOf<JoinEntity>()
 
-    private var eventList = mutableListOf<EventEntity>()
+    var contactLists = mutableListOf<Contact>()
+    var eventLists = mutableListOf<Event>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,45 +50,26 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(MyViewModel::class.java)
 
-        viewModel.getContactResponse()
-        viewModel.getEventResponse()
+        viewModel.getContactResponse().observe(this, Observer {
+            contactLists.addAll(it.contacts!!)
+            viewModel.insertContactListIntoDatabase(contactLists)
+        })
+
+        viewModel.getEventResponse().observe(this, Observer {
+           eventLists.addAll(it.data?.events!!)
+            viewModel.insertEventListIntoDatabase(eventLists)
+        })
 
 
         tvItem.setOnClickListener {
             progressBar.visibility = View.VISIBLE
-            CoroutineScope(Dispatchers.IO).launch {
-                val event = viewModel.getEventEntity()
-                eventList.addAll(event)
+            viewModel.mergeContactAndEventById().observe(this, Observer {
                 joinList.clear()
+                joinList.addAll(it)
+                adapter.notifyDataSetChanged()
+               progressBar.visibility = View.GONE
+            })
 
-                val contactList = HashMap<String, ContactEntity>()
-
-                for (i in 0 until eventList.size) {
-
-                    if (!contactList.containsKey(eventList[i].provider)) {
-
-                        val data = viewModel.getContactEntity(eventList[i].provider!!)
-
-                        contactList.put(eventList[i].provider!!, data)
-
-                        val joinEntity = JoinEntity(data, eventList[i])
-                        joinList.add(joinEntity)
-
-                    }
-                    else {
-
-                        val data = contactList.get(eventList[i].provider)
-
-                        val joinEntity = JoinEntity(data, eventList[i])
-                        joinList.add(joinEntity)
-
-                    }
-                }
-                CoroutineScope(Dispatchers.Main).launch {
-                    adapter.notifyDataSetChanged()
-                    progressBar.visibility = View.GONE
-                }
-            }
         }
     }
 }

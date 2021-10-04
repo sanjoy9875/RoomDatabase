@@ -4,8 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.roomdatabase.contact_model.Contact
+import com.example.roomdatabase.helper.ConverterHelper
 
-@Database(entities = [ContactEntity::class], version = 1)
+
+@Database(entities = [Contact::class], version = 1)
+@TypeConverters(ConverterHelper::class)
 abstract class ContactDatabase : RoomDatabase() {
 
     abstract fun getContactDao(): ContactDAO
@@ -16,7 +21,7 @@ abstract class ContactDatabase : RoomDatabase() {
 
         /**
          * Creating a Database called entity_database
-         * */
+         **/
         fun getRoomDatabase(context: Context): ContactDatabase {
 
             if (INSTANCE == null) {

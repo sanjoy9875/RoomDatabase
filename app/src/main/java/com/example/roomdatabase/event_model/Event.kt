@@ -1,63 +1,98 @@
 package com.example.roomdatabase.event_model
 
 
-import com.google.gson.annotations.SerializedName
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+
+@Entity(tableName = "event_entity")
 data class Event(
-    @SerializedName("bookingId")
+
+    @ColumnInfo(name = "bookingId")
     val bookingId: String? = null,
-    @SerializedName("brand")
+
+    @ColumnInfo(name = "brand")
     val brand: String? = null,
-    @SerializedName("calendar")
+
+    @ColumnInfo(name = "calendar")
     val calendar: String? = null,
-    @SerializedName("cancelEventId")
+
+    @ColumnInfo(name = "cancelEventId")
     val cancelEventId: String? = null,
-    @SerializedName("consumer")
+
+    @ColumnInfo(name = "consumer")
     val consumer: List<String>? = null,
-    @SerializedName("cost")
+
+    @ColumnInfo(name = "cost")
     val cost: Double? = null,
-    @SerializedName("createdTime")
+
+    @ColumnInfo(name = "createdTime")
     val createdTime: Long? = null,
-    @SerializedName("endDateTime")
+
+    @ColumnInfo(name = "endDateTime")
     val endDateTime: String? = null,
-    @SerializedName("endTime")
+
+    @ColumnInfo(name = "endTime")
     val endTime: Long? = null,
-    @SerializedName("id")
+
+    @ColumnInfo(name = "id")
     val id: String? = null,
-    @SerializedName("isDeleted")
+
+    @ColumnInfo(name = "isDeleted")
     val isDeleted: Boolean? = null,
-    @SerializedName("isExternal")
+
+    @ColumnInfo(name = "isExternal")
     val isExternal: Boolean? = null,
-    @SerializedName("label")
+
+    @ColumnInfo(name = "label")
     val label: String? = null,
-    @SerializedName("location")
+
+    @ColumnInfo(name = "location")
     val location: Location? = null,
-    @SerializedName("log")
+
+    @ColumnInfo(name = "log")
     val log: Log? = null,
-    @SerializedName("maxSeats")
+
+    @ColumnInfo(name = "maxSeats")
     val maxSeats: Int? = null,
-    @SerializedName("merchant")
+
+    @ColumnInfo(name = "merchant")
     val merchant: String? = null,
-    @SerializedName("metaData")
+
+    @ColumnInfo(name = "metaData")
     val metaData: MetaData? = null,
-    @SerializedName("parentId")
+
+    @ColumnInfo(name = "parentId")
     val parentId: String? = null,
-    @SerializedName("provider")
+
+    @ColumnInfo(name = "provider")
     val provider: List<String>? = null,
-    @SerializedName("resource")
-    val resource: List<Any>? = null,
-    @SerializedName("service")
+
+    @ColumnInfo(name = "resource")
+    val resource: List<String>? = null,
+
+    @ColumnInfo(name = "service")
     val service: List<String>? = null,
-    @SerializedName("source")
+
+    @ColumnInfo(name = "source")
     val source: String? = null,
-    @SerializedName("startDateTime")
+
+    @ColumnInfo(name = "startDateTime")
     val startDateTime: String? = null,
-    @SerializedName("startTime")
+
+    @ColumnInfo(name = "startTime")
     val startTime: Long? = null,
-    @SerializedName("title")
+
+    @ColumnInfo(name = "title")
     val title: String? = null,
-    @SerializedName("type")
+
+    @ColumnInfo(name = "type")
     val type: String? = null,
-    @SerializedName("updatedTime")
+
+    @ColumnInfo(name = "updatedTime")
     val updatedTime: Long? = null
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "eId") var eId:Int? = null
+}

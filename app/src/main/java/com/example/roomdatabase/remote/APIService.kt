@@ -1,5 +1,6 @@
 package com.example.roomdatabase.remote
 
+import com.example.roomdatabase.contact_model.Contact
 import com.example.roomdatabase.contact_model.ContactsModel
 import com.example.roomdatabase.event_model.EventsModel
 import retrofit2.http.GET
