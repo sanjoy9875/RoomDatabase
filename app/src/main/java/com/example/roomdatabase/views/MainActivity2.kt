@@ -16,8 +16,8 @@ class MainActivity2 : AppCompatActivity() {
         fragmentManager = supportFragmentManager
 
         val fragmentTransaction = fragmentManager.beginTransaction()
-        val blankFragment = BlankFragment()
-        fragmentTransaction.add(R.id.flContainer, blankFragment, "BlankFragment")
+        val mainFragment = MainFragment()
+        fragmentTransaction.add(R.id.flContainer, mainFragment, "MainFragment")
             .commit()
 
     }

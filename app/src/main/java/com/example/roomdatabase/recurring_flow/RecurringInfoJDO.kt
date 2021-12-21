@@ -1,4 +1,4 @@
-package com.example.roomdatabase.jdo
+package com.example.roomdatabase.recurring_flow
 
 import org.threeten.bp.LocalDateTime
 import java.io.Serializable
@@ -6,7 +6,7 @@ import java.util.*
 
 class RecurringInfoJDO(
     var frequency: String? = "No Repeat",
-    var interval: String? = "0",
+    var interval: String? = "1",
     var recurringKey: String? = "",
     var startDateStr: String? = null,
     var endDateStr: String? = null,

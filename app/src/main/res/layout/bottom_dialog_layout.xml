@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="30dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_margin="30dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Working Hours"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/buttonOne"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_background"
+        android:padding="5sp"
+        android:text="Weekdays"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/tvText"
+        app:layout_constraintTop_toBottomOf="@id/tvText" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/buttonTwo"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_background"
+        android:padding="5sp"
+        android:text="Weekdays"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/buttonOne"
+        app:layout_constraintTop_toBottomOf="@id/buttonOne" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/buttonThree"
+        android:background="@drawable/button_background"
+        android:padding="5sp"
+        android:text="Weekdays"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/buttonTwo"
+        app:layout_constraintTop_toBottomOf="@id/buttonTwo" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="#6285FF"
+        android:padding="5sp"
+        android:text="Done"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@id/buttonThree"
+        app:layout_constraintTop_toBottomOf="@id/buttonThree" />
+
+
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
